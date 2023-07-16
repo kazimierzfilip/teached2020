@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout}">
+<head>
+    <title>Teachers</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h2>Teachers:</h2>
+    <table class="table" id="teachers" th:if="${not #lists.isEmpty(teachers)}">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Country</th>
+                <th scope="col">State</th>
+                <th scope="col">City</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="teacher : ${teachers}" th:id="${teacher.id}">
+            <td>
+                <span data-type="text" data-title="First Name"
+                      th:text="${teacher.account.personalData.firstName}"></span>
+            </td>
+            <td>
+                <span data-type="text" data-title="Last Name"
+                      th:text="${teacher.account.personalData.lastName}"></span>
+            </td>
+            <td>
+                <span data-type="number" data-title="Age"
+                      th:text="${teacher.account.personalData.age}"></span>
+            </td>
+            <td>
+                <span data-type="text" data-title="Country"
+                      th:text="${teacher.account.address.country}"></span>
+            </td>
+            <td>
+                <span data-type="text" data-title="State"
+                      th:text="${teacher.account.address.state}"></span>
+            </td>
+            <td>
+                <span data-type="text" data-title="City"
+                      th:text="${teacher.account.address.city}"></span>
+            </td>
+            <td>
+                <span data-type="text" data-title="Description"
+                      th:text="${teacher.description}"></span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <div th:if="${#lists.isEmpty(teachers)}">
+        <p>There is no teachers.</p>
+    </div>
+</div>
+
+</body>
+</html>

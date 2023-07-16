@@ -1,0 +1,21 @@
+Teached - System wspomagający dla firmy udzielającej korepetycji.
+
+Przeznaczenie: 
+System służy do zarządzania korepetycjami. Umożliwia:
+	• koordynowanie wpłat uczniów i wypłat dla nauczycieli
+	• monitorowanie odbywających się lekcji
+	• wspieranie procesów biznesowych poprzez operowanie na przechowywanych danych m.in.:
+		○ wyszukiwanie korepetytorów z wolnymi godzinami
+		○ wyszukiwanie korepetytorów, którym nie zapłacono jeszcze należności
+
+System dzieli się na moduły:
+	• dla firmy
+	• dla korepetytora
+	
+Firma ma możliwość wprowadzania:
+	• danych swoich korepetytorów (czego uczą, gdzie, ich dyspozycyjność, stawki, wypłaty)
+	• danych o swoich klientach(uczniach), czego się uczą, ich wpłaty itp.
+
+Korepetytor rejestruje w systemie:
+	• odbyte lekcje i czas ich trwania
+	• nieobecności, przerwy itp.

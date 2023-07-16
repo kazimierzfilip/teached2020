@@ -1,0 +1,1762 @@
+{
+	"info": {
+		"_postman_id": "200d6739-c3ef-41de-97f5-7acb493233d3",
+		"name": "Teached all requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "EndToEnd",
+			"item": [
+				{
+					"name": "Step1 Admin creates new subject",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Polish\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/subjects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"subjects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step2 Teacher creates an account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"account\":\t{\n\t\t\"email\":\"polish.teacher@mail.com\", \n\t\t\"login\":\"PolishTeacher\",\n\t\t\"password\":\"P@ssw0rd123\", \n\t\t\"status\":\"1\", \n\t    \"personalData\": {\n\t      \"firstName\": \"Magdalena\",\n\t      \"lastName\": \"Wielkopolska\",\n\t      \"age\": 28,\n\t      \"sex\": \"F\"\n\t    },\n\t    \"address\": {\n\t      \"country\": \"Poland\",\n\t      \"state\": \"wielkopolskie\",\n\t      \"city\": \"Poznań\"\n\t    }\n\t},\n\t\"description\":\"I love my country, so I love Polish language.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/teachers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step3 Teacher chooses subjects",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "text/uri-list"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "/api/subjects/-1\n/api/subjects/1\n",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/teachers/1/subjects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"1",
+								"subjects"
+							]
+						},
+						"description": "Assign new subjects to teacher"
+					},
+					"response": []
+				},
+				{
+					"name": "Step4 Teacher updates description",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"I love languages ;)\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/teachers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step5 Student creates an account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"account\": {\n\t\t\"email\":\"young.student@mail.com\", \n\t\t\"login\":\"YoungStudent\",\n\t\t\"password\":\"P@ssw0rd123\", \n\t\t\"status\":\"1\", \n\t\t\"personalData\": {\n\t\t  \"firstName\": \"Marek\",\n\t\t  \"lastName\": \"Marek\",\n\t\t  \"age\": 19,\n\t\t  \"sex\": \"M\"\n\t\t},\n\t\t\"address\": {\n\t\t  \"country\": \"Poland\",\n\t\t  \"state\": \"mazowieckie\",\n\t\t  \"city\": \"Warszawa\"\n\t\t}\n\t},\n\t\"budget\": 200.0\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/students",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step6 Student increases budget",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"budget\": 250.0\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/students/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step7 Teacher creates course",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"subject\": \"/api/subjects/1\",\n\t\"teacher\": \"/api/teachers/1\",\n\t\"student\": \"/api/students/2\",\n\t\"hoursPerWeek\": 4.5,\n\t\"lessonsSchedule\":\"Monday: 18:00 - 19:30\\nWednesday: 18:00 - 19:30\\n:Friday: 18:00 - 19:30\",\n\t\"studentPricePerHour\": 40.0,\n\t\"status\": 1\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/courses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step8 Teacher adds first lesson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"course\": \"/api/courses/1\",\n\t\"duration\": 1.5,\n\t\"startDate\": \"2020-05-11\",\n\t\"endDate\":\"2020-05-13\",\n\t\"notes\": \"Proszę przynieść długopis i zeszyt.\",\n\t\"status\": 0\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/lessons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step9 Update LessonStatus to ACTIVE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"status\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/lessons/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"lessons",
+								"1"
+							]
+						},
+						"description": "For example:\r\nThis update can be triggered when current date is the same as start_date."
+					},
+					"response": []
+				},
+				{
+					"name": "Step10 Student pays for the lesson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sender\":\"/api/students/2\",\n\t\"recipient\":\"/api/teachers/2\",\n\t\"amount\": 60.0,\n\t\"status\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/payments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step11 Update lesson",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"studentPaid\":true,\n\t\"teacherWasPaid\":true,\n\t\"status\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/lessons/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"lessons",
+								"1"
+							]
+						},
+						"description": "For example:\r\nThis update can be triggered when student pays for the lesson."
+					},
+					"response": []
+				},
+				{
+					"name": "Step12 Teacher adds second lesson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"course\": \"/api/courses/1\",\n\t\"duration\": 1.5,\n\t\"startDate\": \"2020-05-13\",\n\t\"endDate\":\"2020-05-15\",\n\t\"notes\": \"Proszę przyjść z głową.\",\n\t\"status\": 0\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/lessons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step13 Teacher checks lessons in course",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/courses/1/lessons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"1",
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step14 Teacher removes second lesson",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/lessons/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"lessons",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Sample scenario.",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Subject",
+			"item": [
+				{
+					"name": "GET subjects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/subjects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"subjects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET subject by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/subjects/-6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"subjects",
+								"-6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get subjects filtered by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/subjects/search/findByNameContainingIgnoreCase?name=technology",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"subjects",
+								"search",
+								"findByNameContainingIgnoreCase"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "technology"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST subject",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Polish\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/subjects/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"subjects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT subject",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Polish-2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/subjects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"subjects",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH subject",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Polish-1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/subjects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"subjects",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE subject",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/subjects/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"subjects",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "GET all payments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/payments/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET payment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/payments/-2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"-2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET payments not paid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/payments/search/findAllByStatus?paymentStatus=WAITING_FOR_PAYMENT",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"search",
+								"findAllByStatus"
+							],
+							"query": [
+								{
+									"key": "paymentStatus",
+									"value": "WAITING_FOR_PAYMENT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"sender\":\"/api/students/-1\",\r\n\t\"recipient\":\"/api/teachers/-3\",\r\n\t\"amount\": 60.0,\r\n\t\"status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/payments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH payment",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/payments/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Teacher",
+			"item": [
+				{
+					"name": "GET all teachers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teacher by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/-2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"-2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teacher courses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/-2/courses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"-2",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teachers sorted by two columns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/?sort=Account_Address_State,desc&sort=Account_PersonalData_Age,asc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								""
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "Account_Address_State,desc"
+								},
+								{
+									"key": "sort",
+									"value": "Account_PersonalData_Age,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teachers filtered by login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/search/findByAccount_LoginContainingIgnoreCase?login=user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"search",
+								"findByAccount_LoginContainingIgnoreCase"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teachers filtered by firstName and lastName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/search/findByAccount_PersonalData_FirstNameContainingIgnoreCaseAndAccount_PersonalData_LastNameContainingIgnoreCase?firstName=Englis&lastName=man",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"search",
+								"findByAccount_PersonalData_FirstNameContainingIgnoreCaseAndAccount_PersonalData_LastNameContainingIgnoreCase"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "Englis"
+								},
+								{
+									"key": "lastName",
+									"value": "man"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teachers filtered by sex",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/search/findByAccount_PersonalData_Sex?sex=F",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"search",
+								"findByAccount_PersonalData_Sex"
+							],
+							"query": [
+								{
+									"key": "sex",
+									"value": "F"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teachers filtered by age range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/search/findByAccount_PersonalData_AgeBetween?from=25&to=35",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"search",
+								"findByAccount_PersonalData_AgeBetween"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "25"
+								},
+								{
+									"key": "to",
+									"value": "35"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST teacher and account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"account\":\t{\n\t\t\"email\":\"polish.teacher@mail.com\", \n\t\t\"login\":\"PolishTeacher\",\n\t\t\"password\":\"P@ssw0rd123\", \n\t\t\"status\":\"1\", \n\t    \"personalData\": {\n\t      \"firstName\": \"Magdalena\",\n\t      \"lastName\": \"Wielkopolska\",\n\t      \"age\": 28,\n\t      \"sex\": \"F\"\n\t    },\n\t    \"address\": {\n\t      \"country\": \"Poland\",\n\t      \"state\": \"wielkopolskie\",\n\t      \"city\": \"Poznań\"\n\t    }\n\t},\n\t\"description\":\"I love my country, so I love Polish language.\",\n\t\"subjects\": [\n\t\t{\n\t\t\t\"id\": -1\n\t\t}\n\t]\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/teachers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"teachers"
+							]
+						},
+						"description": "Method declared in TeacherController"
+					},
+					"response": []
+				},
+				{
+					"name": "GET teachers filtered by age and city",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/search/queryByAgeBetweenAndCity?from=0&to=41&city=Lublin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"search",
+								"queryByAgeBetweenAndCity"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "to",
+									"value": "41"
+								},
+								{
+									"key": "city",
+									"value": "Lublin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teachers filtered by age, city and subject",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/search/queryByAgeBetweenAndCityAndSubject?from=0&to=41&city=Lublin&subject=%",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"search",
+								"queryByAgeBetweenAndCityAndSubject"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "to",
+									"value": "41"
+								},
+								{
+									"key": "city",
+									"value": "Lublin"
+								},
+								{
+									"key": "subject",
+									"value": "%"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teachers filtered by multiple parameters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/search/queryByStatisticParameters?minAge=0&maxAge=60&city=%&subject=%&minAC=0&maxAC=10&minPaid=45&maxPaid=1000&minHours=0&maxHours=160&minUnpaid=0&maxUnpaid=1000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"search",
+								"queryByStatisticParameters"
+							],
+							"query": [
+								{
+									"key": "minAge",
+									"value": "0"
+								},
+								{
+									"key": "maxAge",
+									"value": "60"
+								},
+								{
+									"key": "city",
+									"value": "%"
+								},
+								{
+									"key": "subject",
+									"value": "%"
+								},
+								{
+									"key": "minAC",
+									"value": "0"
+								},
+								{
+									"key": "maxAC",
+									"value": "10"
+								},
+								{
+									"key": "minPaid",
+									"value": "45"
+								},
+								{
+									"key": "maxPaid",
+									"value": "1000"
+								},
+								{
+									"key": "minHours",
+									"value": "0"
+								},
+								{
+									"key": "maxHours",
+									"value": "160"
+								},
+								{
+									"key": "minUnpaid",
+									"value": "0"
+								},
+								{
+									"key": "maxUnpaid",
+									"value": "1000"
+								}
+							]
+						},
+						"description": "List of parameters created according to USE CASE"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT teacher",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"account\":\t{\r\n\t\t\"email\":\"polish.teacher@mail.com\", \r\n\t\t\"login\":\"PolishTeacher\",\r\n\t\t\"password\":\"P@ssw0rd123\", \r\n\t\t\"status\":\"1\", \r\n\t    \"personalData\": {\r\n\t      \"firstName\": \"Magdalena\",\r\n\t      \"lastName\": \"Wielkopolska\",\r\n\t      \"age\": 28,\r\n\t      \"sex\": \"F\"\r\n\t    },\r\n\t    \"address\": {\r\n\t      \"country\": \"Poland\"\r\n\t    }\r\n\t},\r\n\t\"description\":\"I love my country, so I love Polish language.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/teachers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH teacher",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"account\":\t{\r\n\t\t\"email\":\"polish.teacherCHANGED@mail.com\"\r\n\t},\r\n\t\"description\":\"I love my country, so I love Polish language.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/teachers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET teacher 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/teachers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"teachers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "GET all students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET student by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/-3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"-3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET students filtered by login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/search/findByAccount_LoginContainingIgnoreCase?login=user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"search",
+								"findByAccount_LoginContainingIgnoreCase"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET students filtered by email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/search/findByAccount_EmailContainingIgnoreCase?email=user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"search",
+								"findByAccount_EmailContainingIgnoreCase"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET students filtered by firstName and lastName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/search/findByAccount_PersonalData_FirstNameContainingIgnoreCaseAndAccount_PersonalData_LastNameContainingIgnoreCase?firstName=&lastName=New",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"search",
+								"findByAccount_PersonalData_FirstNameContainingIgnoreCaseAndAccount_PersonalData_LastNameContainingIgnoreCase"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": ""
+								},
+								{
+									"key": "lastName",
+									"value": "New"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET students filtered by sex",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/search/findByAccount_PersonalData_Sex?sex=F",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"search",
+								"findByAccount_PersonalData_Sex"
+							],
+							"query": [
+								{
+									"key": "sex",
+									"value": "F"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET students filtered by age and city",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/search/queryByAgeBetweenAndCity?from=0&to=41&city=Lublin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"search",
+								"queryByAgeBetweenAndCity"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "to",
+									"value": "41"
+								},
+								{
+									"key": "city",
+									"value": "Lublin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET students filtered by multiple parameters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/search/queryByStatisticParameters?minAge=0&maxAge=60&city=%&minPaid=45&maxPaid=1000&minHours=0&maxHours=160&minUnpaid=0&maxUnpaid=1000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"search",
+								"queryByStatisticParameters"
+							],
+							"query": [
+								{
+									"key": "minAge",
+									"value": "0"
+								},
+								{
+									"key": "maxAge",
+									"value": "60"
+								},
+								{
+									"key": "city",
+									"value": "%"
+								},
+								{
+									"key": "minPaid",
+									"value": "45"
+								},
+								{
+									"key": "maxPaid",
+									"value": "1000"
+								},
+								{
+									"key": "minHours",
+									"value": "0"
+								},
+								{
+									"key": "maxHours",
+									"value": "160"
+								},
+								{
+									"key": "minUnpaid",
+									"value": "0"
+								},
+								{
+									"key": "maxUnpaid",
+									"value": "1000"
+								}
+							]
+						},
+						"description": "List of parameters created according to USE CASE"
+					},
+					"response": []
+				},
+				{
+					"name": "GET students by student",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password6",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "User6",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET student 3",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "User6",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password6",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/students/-3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"-3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "GET all courses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/courses/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET course by id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "User2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/courses/-1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"-1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET my course",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "User2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/courses/-1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"-1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET not mine course",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password4",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "User4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/courses/-1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"-1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Lesson",
+			"item": [
+				{
+					"name": "get all lessons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/lessons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET lesson by id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "User2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/lessons/-1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"lessons",
+								"-1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Get accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/accounts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get account by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/accounts/-1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"-1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Administrator",
+			"item": [
+				{
+					"name": "Get administartors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/administrators",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"administrators"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get administrator by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/administrators",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"administrators"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password1",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "User1",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "386fada4-828d-4719-9614-adadab47f0a9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3339294c-5564-4a1f-a248-873a96ec6949",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <script src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="webjars/bootstrap/4.5.0/css/bootstrap.min.css"  rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <a href="/">
+            <img th:src="@{/images/logo.png}" alt="logo" />
+        </a>
+        <nav class="navbar navigation">
+            <ul>
+                <li><a th:href="@{/subjects}">Subjects</a></li>
+                <li><a th:href="@{/teachers/create}">Create teacher</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main role="main">
+        <div class="container">
+            <div class="content" layout:fragment="content">
+                <!-- render content -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p>&copy; 2020 Teached</p>
+        </div>
+    </footer>
+
+</body>
+</html>

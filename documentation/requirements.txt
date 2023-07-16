@@ -1,0 +1,12 @@
+Wymagania
+
+System umożliwia:
+	• Zapisywanie informacji o uczniach
+	• Zapisywanie informacji o nauczycielach
+	• Zapisywanie informacji o przeprowadzanych lekcjach
+	• Wyszukiwanie uczniów pod względem różnych parametrów (wiek, miejsce zamieszkania, suma miesięcznych opłat, suma godzin odbytych lekcji, data dołączenia, sumy zaległych wpłat)
+	• Wyszukiwanie nauczycieli pod względem różnych parametrów (wiek, miejsce zamieszkania, prowadzonych przedmiotów, ilości prowadzonych lekcji, dostępnych godzin, suma miesięcznych należności, suma godzin odbytych lekcji, data dołączenia, sumy zaległych wypłat)
+	• Rejestrowanie wpłat uczniów
+	• Rejestrowanie wypłat dla korepetytorów
+	• Dodawanie odbytych lekcji
+	

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout}">
+<head>
+    <title>New teacher</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <form action="#" th:action="@{/teachers/create}" th:object="${teacher}" method="post">
+        <label for="email">Email</label>
+        <input type="text" th:field="*{account.email}" id="email" placeholder="Email">
+        <span th:if="${#fields.hasErrors('account.email')}" th:errors="*{account.email}"></span>
+        <label for="login">Name</label>
+        <input type="text" th:field="*{account.login}" id="login" placeholder="Login">
+        <span th:if="${#fields.hasErrors('account.login')}" th:errors="*{account.login}"></span>
+        <label for="password">Password</label>
+        <input type="password" th:field="*{account.password}" id="password" placeholder="Password">
+        <span th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"></span>
+        <fieldset>
+            <legend>Personal Data</legend>
+            <label for="first_name">First Name</label>
+            <input type="text" th:field="*{account.personalData.firstName}" id="first_name" placeholder="First Name">
+            <span th:if="${#fields.hasErrors('account.personalData.firstName')}" th:errors="*{account.personalData.firstName}"></span>
+            <label for="last_name">Last Name</label>
+            <input type="text" th:field="*{account.personalData.lastName}" id="last_name" placeholder="Last Name">
+            <span th:if="${#fields.hasErrors('account.personalData.lastName')}" th:errors="*{account.personalData.lastName}"></span>
+            <label for="age">Age</label>
+            <input type="text" th:field="*{account.personalData.age}" id="age" placeholder="0">
+            <span th:if="${#fields.hasErrors('account.personalData.age')}" th:errors="*{account.personalData.age}"></span>
+            <label for="sex">Sex</label>
+            <input type="text" th:field="*{account.personalData.sex}" id="sex" placeholder="M">
+            <span th:if="${#fields.hasErrors('account.personalData.sex')}" th:errors="*{account.personalData.sex}"></span>
+            <fieldset>
+                <legend>Address</legend>
+                <label for="country">Country</label>
+                <input type="text" th:field="*{account.address.country}" id="country" placeholder="Country">
+                <span th:if="${#fields.hasErrors('account.address.country')}" th:errors="*{account.address.country}"></span>
+                <label for="state">State</label>
+                <input type="text" th:field="*{account.address.state}" id="state" placeholder="State">
+                <span th:if="${#fields.hasErrors('account.address.state')}" th:errors="*{account.address.state}"></span>
+                <label for="city">City</label>
+                <input type="text" th:field="*{account.address.city}" id="city" placeholder="City">
+                <span th:if="${#fields.hasErrors('account.address.city')}" th:errors="*{account.address.city}"></span>
+            </fieldset>
+        </fieldset>
+        <label for="description">Description</label>
+        <input type="text" th:field="*{description}" id="description" placeholder="Description">
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        <input type="submit" value="Create teacher account">
+    </form>
+</div>
+
+</body>
+</html>
